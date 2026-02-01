@@ -13,19 +13,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 2. 设置 Java 17 (修复报错的核心：旧代码用的是 11)
+      # 2. 设置 Java 17
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
 
-      # 3. 打包 APK (指定 Gradle 8.0，解决你没有 gradlew 文件的问题)
-      # 注意：千万不要再加 Setup Android SDK 的步骤了，那个是多余且会报错的
+      # 3. 打包 APK
+      # 🔴 修复点：版本号加上了单引号 '8.0.2'，防止被识别为数字 8
       - name: Build debug APK
         uses: gradle/gradle-build-action@v2
         with:
-          gradle-version: 8.0
+          gradle-version: '8.0.2'
           arguments: assembleDebug
 
       # 4. 上传结果
