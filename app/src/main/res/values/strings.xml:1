@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Epson Direct Print</string>
+    <string name="app_title">连接 Epson 打印机并打印</string>
+    <string name="hint_ssid">打印机热点 SSID（例如：DIRECT-xx-EPSON）</string>
+    <string name="hint_password">热点密码（若有）</string>
+    <string name="btn_connect">连接打印机热点</string>
+    <string name="status_unknown">当前 Wi‑Fi：未知</string>
+    <string name="btn_check_wifi">刷新当前 Wi‑Fi</string>
+    <string name="btn_pick_print">选择文件并打印（PDF/图片）</string>
+</resources>
