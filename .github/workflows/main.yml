@@ -9,27 +9,26 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # 1. 拉取代码
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 使用 Java 17，适配新版 Android 编译环境
+      # 2. 设置 Java 环境 (使用 Java 17 适配新版 Android)
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
 
-      # 关键修改：删除了报错的 Setup Android SDK 步骤
-      # GitHub 服务器自带 Android 环境，无需手动配置 api-level
-
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
+      # 3. 打包 APK (关键修改：强制指定 Gradle 版本，不使用你仓库里缺失的 gradlew)
       - name: Build debug APK
         uses: gradle/gradle-build-action@v2
         with:
+          # 这里手动指定版本 8.0，绕过对 gradlew 文件的依赖
+          gradle-version: 8.0
           arguments: assembleDebug
 
+      # 4. 上传生成的 APK 供下载
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
